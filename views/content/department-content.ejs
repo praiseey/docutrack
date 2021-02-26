@@ -1,0 +1,73 @@
+<% if (title == 'Create Department') { %>
+    <div class="col-sm-8">    
+      <div class="jumbotron">
+          <form action="" method="post">
+            Name:<br>
+            <input type="text" name="department_name" placeholder="IT">
+            <br><br>
+            <input type="submit" value="Create Department">
+          </form>
+      </div>
+  </div>
+  <% } else if (title == 'Update Department') { %>
+    <div class="col-sm-8">    
+      <div class="jumbotron">
+          <form action="" method="post">
+            Name:<br>
+            <input type="text" name="department_name" value="<%= department.department_name %>">
+            <br><br>
+            <input type="submit" value="Update Department">
+          </form>
+      </div>
+  </div>
+<% } else if (title == 'Department List') { %>
+    <div class="col-sm-8">    
+        <div class="">
+        <ol>
+        <% departments.forEach(function(department) { %>
+                <li>
+                    <h4 class="text-capitalize"><a href="/department/<%= department.id %>"><%= department.department_name %></a></h4>
+                     <a href="/department/<%= department.id %>/update">Edit  Department</a> | <a href="/department/<%= department.id %>/delete">Delete Department</a>
+                </li>
+            <br/>
+        <% }); %>
+        </ol>
+    </div>
+    <br><br>
+          
+          <a href="/department/create">
+            CREATE NEW DEPARTMENT
+          </a>
+    </div>
+    <% } else if (title == 'Department Details') { %>
+      <div class="col-sm-8">
+          <div class="">
+              <h2><%= department.department_name %>'s Details: </h2>
+              <p>ID: <%= department.id %></p>
+              <p>Name: <%= department.department_name %></p>
+              <a href="/department/<%= department.id %>/update">Edit Department</a>  |  <a href="/department/<%= department.id %>/delete">Delete Department</a>
+              <br>
+
+              <!-- <% if (department.Employees.length == 0) { %>
+                <h4>There are no employees in this department.</h4>
+              <% } else { %>
+                <h4>Employees in <%= department.department_name %>: </h4>
+                <ol>
+                  <% department.Employees.forEach(function(employee) { %>
+                    <li>
+                      <a href="/employee/<%= employee.id %>">
+                        <%= employee.first_name %> <% employee.last_name %>
+                      </a>
+                    </li>
+                  <% }); %>
+                </ol>
+              <% }; %> -->
+          </div>
+          <br><br>
+          
+          <a href="/department/create">
+            CREATE NEW DEPARTMENT
+          </a>
+      </div>
+
+<% }; %>

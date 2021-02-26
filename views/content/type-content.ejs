@@ -1,0 +1,80 @@
+<% if (title == 'Create Type') { %>
+    <div class="col-sm-8">    
+      <div class="jumbotron">
+          <form action="" method="post">
+            Name:<br>
+            <input type="text" name="type_name" placeholder="Type Name">
+            <br><br>
+            Description:<br>
+            <textarea name="type_description" placeholder="Description"></textarea>
+            <br><br>
+            <input type="submit" value="Create Type">
+          </form>
+      </div>
+  </div>
+<% } else if (title == 'Update Type') { %>
+  <div class="col-sm-8">    
+    <div class="jumbotron">
+        <form action="" method="post">
+          Name:<br>
+          <input type="text" name="type_name" value="<%= type.type_name %>">
+          <br>
+          Description:<br>
+          <input type="text" name="type_description" value="<%= type.type_description %>">
+          <br><br>
+          <input type="submit" value="Update Type">
+        </form>
+    </div>
+</div>
+<% } else if (title == 'Type List') { %>
+  <div class="col-sm-8">    
+      <div class="">
+      <ol>
+      <% types.forEach(function(type) { %>
+              <li>
+                  <h4 class="text-capitalize"><a href="/type/<%= type.id %>"><%= type.type_name %></a></h4>
+                    <a href="/type/<%= type.id %>/update">Edit  Type</a> | <a href="/type/<%= type.id %>/delete">Delete Type</a>
+              </li>
+          <br/>
+      <% }); %>
+      </ol>
+  </div>
+  <br><br>
+          
+          <a href="/type/create">
+            CREATE NEW TYPE
+          </a>
+  </div>
+  <% } else if (title == 'Type Details') { %>
+    <div class="col-sm-8">
+      <div class="">
+        <h4><%= type.type_name %> Details</h4>
+        <p>ID: <%= type.id %></p>
+        <p>Name: <%= type.type_name %></p>
+        <p>Description: <%= type.type_description %></p>
+        <a href="/type/<%= type.id %>/update">Edit  Type</a> | <a href="/type/<%= type.id %>/delete">Delete Type</a>
+        <br><br>
+
+        <% if (type.Documents.length == 0) { %>
+          <h4>There are no documents with this type yet.</h4>
+        <% } else { %>
+          <h4>Documents in <%= type.type_name %></h4>
+          <ol>
+            <% type.Documents.forEach(function(document) { %>
+              <li>
+                <a href="/document/<%= document.id %>">
+                  <%= document.subject %>
+                </a>
+              </li>
+            <% }); %>
+          </ol>
+        <% }; %>
+      </div>
+      <br>
+
+      <a href="/type/create">
+        <h4>Create New Type</h4>
+      </a>
+    </div>
+<% }; %>
+  

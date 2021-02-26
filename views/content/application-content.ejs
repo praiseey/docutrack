@@ -1,0 +1,82 @@
+<% if (title == 'Create Application') { %>
+    <div class="col-sm-8">    
+      <div class="jumbotron">
+          <form action="" method="post">
+            Name:<br>
+            <input type="text" name="app_name" placeholder="App name">
+            <br><br>
+            Description:<br>
+            <textarea name="app_description" placeholder="Describe this app here..."></textarea>
+            <br><br>
+            <input type="submit" value="Create App">
+          </form>
+      </div>
+  </div>
+  <% } else if (title == 'Update Application') { %>
+    <div class="col-sm-8">    
+      <div class="jumbotron">
+          <form action="" method="post">
+            Name:<br>
+            <input type="text" name="app_name" value="<%= application.app_name %>">
+            <br>
+            Description:<br>
+            <textarea name="app_description" value="<%= application.app_description %>"></textarea>
+            <br><br>
+            <input type="submit" value="Update App">
+          </form>
+      </div>
+  </div>
+  
+  <% } else if (title == 'Application List') { %>
+    <div class="col-sm-8">    
+        <div class="">
+        <ol>
+        <% applications.forEach(function(application) { %>
+                <li>
+                    <h4 class="text-capitalize"><a href="/application/<%= application.id %>"><%= application.app_name %></a></h4>
+                     <a href="/application/<%= application.id %>/update">Edit  Application</a> | <a href="/application/<%= application.id %>/delete">Delete Application</a>
+                </li>
+            <br/>
+        <% }); %>
+        </ol>
+    </div>
+    <br><br>
+    <a href="/application/create">
+      CREATE NEW APPLICATION
+    </a>
+    </div>
+
+  <% } else if (title == 'Application Details') { %>
+    <div class="col-sm-8">
+      <div class="">
+        <h3>Application Details: </h3>
+        <p>ID: <%= application.id %></p>
+        <p>Name: <% application.app_name %></p>
+        <p>Description: <%= application.app_description %></p>
+        <br>
+        <a href="/application/<%= application.id %>/update">Edit  Application</a> | <a href="/application/<%= application.id %>/delete">Delete Application</a>
+
+        <% if (application.Documents.length == 0) { %>
+          <h4>No documents with this application type.</h4>
+        <% } else { %>
+          <h4><%= application.app_name %> Documents</h4>
+          <ol>
+            <% application.Documents.forEach(function(document) { %>
+              <li>
+                <a href="/document/<%= document.id %>">
+                  <%= document.subject %>
+                </a>
+              </li>
+            <% }); %>
+          </ol>
+        <% }; %>
+      </div>
+      <br>
+
+      <a href="/application/create">
+        <h4>Create New App</h4>
+      </a>
+    </div>
+
+  
+  <% }; %>

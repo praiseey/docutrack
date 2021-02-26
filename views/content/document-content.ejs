@@ -1,0 +1,138 @@
+<% if (title == 'Create Document') { %>
+    <div class="col-sm-8">    
+      <div class="jumbotron">
+          <form action="" method="post">
+            Subject:<br>
+            <input type="text" name="subject" placeholder="Subject">
+            <br><br>
+            Description:<br>
+            <input type="text" name="description" placeholder="Description">
+            <br><br>
+            Employee:<br>
+            <select name="employee_id">
+              <% employees.forEach(function(employee) { %>
+                <option value="<%= employee.id %>"><%= employee.username %></option>
+                <br>
+              <% }); %>
+            </select>
+            <br><br>
+            Type:<br>
+            <% types.forEach(function(type) { %>
+              <input type="radio" name="type_id" value="<%= type.id %>">
+              <label for="<%= type.id %>"><%= type.type_name %></label>
+              <br>
+            <% }); %>
+            <br><br>
+            Application:<br>
+            <select name="application_id">
+              <% applications.forEach(function(application) { %>
+                <option value="<%= application.id %>"><%= application.app_name %></option>
+                <br>
+              <% }); %>
+            </select>
+            <br><br>
+            Category:<br>
+            <select name="category_id">
+              <% categories.forEach(function(category) { %>
+                <option value="<%= category.id %>"><%= category.category_name %></option>
+                <br>
+              <% }); %>
+            </select>
+            <br><br>
+            <input type="submit" value="Create Document">
+          </form>
+      </div>
+  </div>
+  <% } else if (title == 'Update Document') { %>
+    <div class="col-sm-8">    
+      <div class="jumbotron">
+          <form action="" method="post">
+              Subject:<br>
+              <input type="text" name="subject" value="<%= document.subject %>">
+              <br><br>
+              Description:<br>
+              <input type="text" name="description" value="<%= document.description %>">
+              <br><br>
+              Employee:<br>
+              <select name="employee_id">
+                <% employees.forEach(function(employee) { %>
+                  <option value="<%= employee.id %>"><%= employee.username %></option>
+                  <br>
+                <% }); %>
+              </select>
+              <br><br>
+              Type:<br>
+              <% types.forEach(function(type) { %>
+                <input type="radio" name="type_id" value="<%= type.id %>">
+                <label for="<%= type.id %>"><%= type.type_name %></label>
+                <br>
+              <% }); %>
+              <br><br>
+              Application:<br>
+              <select name="application_id">
+                <% applications.forEach(function(application) { %>
+                  <option value="<%= application.id %>"><%= application.app_name %></option>
+                  <br>
+                <% }); %>
+              </select>
+              <br><br>
+              Category:<br>
+              <select name="category_id">
+                <% categories.forEach(function(category) { %>
+                  <option value="<%= category.id %>"><%= category.category_name %></option>
+                  <br>
+                <% }); %>
+              </select>
+              <input type="submit" value="Update Document">
+          </form>
+      </div>
+  </div>
+  <% } else if (title == 'Document List') { %>
+    <div class="col-sm-8">    
+        <div class="">
+        <ol>
+        <% documents.forEach(function(document) { %>
+                <li>
+                    <h4 class="text-capitalize"><a href="/document/<%= document.id %>"><%= document.subject %></a></h4>
+                     <a href="/document/<%= document.id %>/update">Edit  Document</a> | <a href="/document/<%= document.id %>/delete">Delete Document</a>
+                </li>
+            <br/>
+        <% }); %>
+        </ol>
+    </div>
+    <br><br>
+    <a href="/document/create">
+      CREATE NEW DOCUMENT
+    </a>
+    </div>
+  <% } else if (title == 'Document Details') { %>
+    <div class="col-sm-8">
+      <div class="">
+        <h4>Details of <%= document.subject %>: </h4>
+        <p>ID: <%= document.id %></p>
+        <p>Subject: <%= document.subject %> </p>
+        <p>Description: <%= document.description %></p>
+        <p>Employee: <%= document.Employee.name %></p>
+        <p>Type: <%= document.Type.type_name %></p>
+        <p>Application: <%= document.Application.app_name %></p>
+        <p>Category: <%= document.Category.category_name %></p>
+        <p>Status: <%= document.Status %></p>
+        <br>
+        <a href="/document/<%= document.id %>/update">Edit  Document</a> | <a href="/document/<%= document.id %>/delete">Delete Document</a>
+
+        
+        <h3>Leave a Comment</h3>
+        <form action="/comment/create" method="POST">
+          Comment Title:<br>
+            <input type="text" name="subject" placeholder="Title">
+            <br><br>
+          Comment Body:<br>
+          <input type="text" name="description" placeholder="Leave comment here... ">
+          <br><br>
+          <input type="submit" value="Create Comment">
+        </form>
+      </div>
+    </div>
+  <% }; %>
+   
+  
